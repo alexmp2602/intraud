@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import MobileMenu from "./MobileMenu";
 import ProductMenu from "./ProductMenu";
 
 const navigation = [
@@ -17,10 +18,11 @@ export default function Header() {
           <Image
             src="/images/brand/intraud-logo.png"
             alt="Intraud"
-            width={240}
-            height={72}
+            width={575}
+            height={230}
+            sizes="144px"
             priority
-            className="h-auto w-41.25"
+            className="h-auto w-36 shrink-0"
           />
         </Link>
 
@@ -41,17 +43,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <button
-          type="button"
-          className="flex size-11 items-center justify-center lg:hidden"
-          aria-label="Abrir menú"
-        >
-          <span className="flex w-6 flex-col gap-1.25" aria-hidden="true">
-            <span className="h-0.5 w-full bg-(--foreground)" />
-            <span className="h-0.5 w-full bg-(--foreground)" />
-            <span className="h-0.5 w-full bg-(--foreground)" />
-          </span>
-        </button>
+        <MobileMenu />
       </div>
     </header>
   );
