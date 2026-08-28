@@ -1,18 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { navigation } from "@/data/navigation";
+
 import MobileMenu from "./MobileMenu";
 import ProductMenu from "./ProductMenu";
 
-const navigation = [
-  { label: "Servicio técnico", href: "/servicio-tecnico" },
-  { label: "Empresa", href: "/empresa" },
-  { label: "Contacto", href: "/contacto" },
-];
-
 export default function Header() {
   return (
-    <header className="border-b border-(--border) bg-white">
+    <header className="sticky top-0 z-50 border-b border-(--color-border) bg-white">
       <div className="container flex h-24 items-center justify-between">
         <Link href="/" aria-label="Ir al inicio">
           <Image
@@ -20,9 +16,9 @@ export default function Header() {
             alt="Intraud"
             width={575}
             height={230}
-            sizes="144px"
+            sizes="150px"
             priority
-            className="h-auto w-36 shrink-0"
+            className="h-15 w-37.5 shrink-0"
           />
         </Link>
 
@@ -36,7 +32,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-[15px] font-semibold transition-colors hover:text-(--brand-red)"
+              className="text-[15px] font-semibold transition-colors hover:text-(--color-brand-red)"
             >
               {item.label}
             </Link>
