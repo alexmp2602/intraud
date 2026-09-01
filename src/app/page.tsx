@@ -1,9 +1,17 @@
+import CompanyIntro from "@/components/home/CompanyIntro";
+import FinalCta from "@/components/home/FinalCta";
 import Hero from "@/components/home/Hero";
+import ProductFamilies from "@/components/home/ProductFamilies";
+import TechnicalService from "@/components/home/TechnicalService";
 
 export default function Home() {
   return (
     <main>
       <Hero />
+      <ProductFamilies />
+      <CompanyIntro />
+      <TechnicalService />
+      <FinalCta />
     </main>
   );
 }

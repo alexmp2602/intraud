@@ -40,7 +40,7 @@ export default function Hero() {
             para trabajar.
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-(--color-steel-300) md:mt-8 md:text-xl">
+          <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-(--color-steel-300) sm:text-lg md:mt-8 md:text-xl">
             Equipos de soldadura y corte desarrollados para responder en taller,
             obra e industria.
           </p>
