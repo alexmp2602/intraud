@@ -1,8 +1,18 @@
 import Link from "next/link";
 
+import ProductCard from "@/components/products/ProductCard";
 import { productGroups } from "@/data/navigation";
+import { getCatalogProducts } from "@/lib/catalog";
 
-export default function ProductsPage() {
+type ProductsPageProps = { searchParams: Promise<{ categoria?: string }> };
+
+export const dynamic = "force-dynamic";
+
+export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+  const [{ categoria }, products] = await Promise.all([searchParams, getCatalogProducts()]);
+  const selectedCategory = productGroups.some((group) => group.href === `/productos?categoria=${categoria}`) ? categoria : undefined;
+  const visibleProducts = selectedCategory ? products.filter((product) => product.categoryId === selectedCategory) : products;
+
   return (
     <main>
       <section className="bg-(--color-surface) py-16 lg:py-20">
@@ -25,7 +35,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <section className="border-y border-(--color-border) bg-white">
+      <section className="sticky top-15 z-20 border-y border-(--color-border) bg-white/95 backdrop-blur">
         <div className="container overflow-x-auto">
           <nav
             className="flex min-w-max items-center gap-1 py-4"
@@ -33,65 +43,29 @@ export default function ProductsPage() {
           >
             <Link
               href="/productos"
-              className="rounded-sm bg-black px-4 py-2.5 text-sm font-semibold text-white"
+              className={`rounded-sm px-4 py-2.5 text-sm font-semibold ${!selectedCategory ? "bg-black text-white" : "hover:bg-(--color-steel-100)"}`}
             >
               Todos
             </Link>
 
-            {productGroups.map((group) => (
-              <Link
-                key={group.name}
-                href={group.href}
-                className="rounded-sm px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-(--color-steel-100)"
-              >
-                {group.name}
-              </Link>
-            ))}
+            {productGroups.map((group) => {
+              const active = group.href.endsWith(`=${selectedCategory}`);
+              return <Link key={group.name} href={group.href} className={`rounded-sm px-4 py-2.5 text-sm font-semibold transition-colors ${active ? "bg-black text-white" : "hover:bg-(--color-steel-100)"}`}>{group.name}</Link>;
+            })}
           </nav>
         </div>
       </section>
 
       <section className="py-16 lg:py-20">
         <div className="container">
+          <div className="mb-8 flex items-end justify-between gap-6">
+            <h2 className="font-display text-4xl font-semibold tracking-tight uppercase">
+              {selectedCategory ? productGroups.find((group) => group.href.endsWith(`=${selectedCategory}`))?.name : "Todos los equipos"}
+            </h2>
+            <p className="text-sm text-(--color-muted-foreground)">{visibleProducts.length} modelos</p>
+          </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {productGroups.map((group) => (
-              <Link
-                key={group.name}
-                href={group.href}
-                className="group flex min-h-64 flex-col border border-(--color-border) p-7 transition-colors hover:bg-black hover:text-white"
-              >
-                <span
-                  className="mb-8 h-1 w-12"
-                  style={{ backgroundColor: group.color }}
-                  aria-hidden="true"
-                />
-
-                <h2 className="font-display text-4xl font-semibold tracking-tight uppercase">
-                  {group.name}
-                </h2>
-
-                <ul className="mt-5 space-y-1.5">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-sm text-(--color-muted-foreground) transition-colors group-hover:text-(--color-steel-300)"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <span className="mt-auto flex items-center gap-2 pt-8 font-semibold text-(--color-brand-red)">
-                  Ver línea
-                  <span
-                    className="transition-transform group-hover:translate-x-1"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-                </span>
-              </Link>
-            ))}
+            {visibleProducts.map((product) => <ProductCard key={product.id} product={product} />)}
           </div>
         </div>
       </section>
