@@ -42,9 +42,10 @@ export default function ProductMenu() {
     >
       <button
         type="button"
-        className="flex items-center gap-1.5 text-[15px] font-semibold transition-colors hover:text-(--color-brand-red) focus-visible:text-(--color-brand-red)"
+        className="flex min-h-11 items-center gap-1.5 text-[15px] font-semibold transition-colors hover:text-(--color-brand-red) focus-visible:text-(--color-brand-red)"
         aria-expanded={isOpen}
         aria-controls={panelId}
+        aria-haspopup="menu"
         onClick={() => setIsOpen((open) => !open)}
       >
         Productos
@@ -74,7 +75,7 @@ export default function ProductMenu() {
             : "invisible -translate-y-2 opacity-0"
         }`}
       >
-        <div className="w-180 border border-(--color-border) bg-white p-7 shadow-[0_12px_32px_rgb(0_0_0/0.08)]">
+        <div className="w-180 border border-(--color-border) bg-white p-7 shadow-[0_18px_50px_rgb(0_0_0/0.12)]">
           <div className="grid grid-cols-3 gap-x-10 gap-y-8">
             {productGroups.map((group) => (
               <div key={group.name}>

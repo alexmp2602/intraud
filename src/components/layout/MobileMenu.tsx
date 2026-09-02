@@ -1,31 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { navigation, productGroups } from "@/data/navigation";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (isOpen && !dialog.open) dialog.showModal();
+    if (!isOpen && dialog.open) dialog.close();
   }, [isOpen]);
 
   const closeMenu = () => {
@@ -36,35 +24,46 @@ export default function MobileMenu() {
     <>
       <button
         type="button"
-        className="relative z-60 flex size-11 items-center justify-center lg:hidden"
-        aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+        className="flex size-11 items-center justify-center rounded-sm lg:hidden"
+        aria-label="Abrir menú"
         aria-expanded={isOpen}
         aria-controls="mobile-navigation"
         onClick={() => setIsOpen((open) => !open)}
       >
-        {isOpen ? (
-          <span className="relative size-6" aria-hidden="true">
-            <span className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 rotate-45 bg-(--color-foreground)" />
-            <span className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 -rotate-45 bg-(--color-foreground)" />
-          </span>
-        ) : (
-          <span className="flex w-6 flex-col gap-1.25" aria-hidden="true">
-            <span className="h-0.5 w-full bg-(--color-foreground)" />
-            <span className="h-0.5 w-full bg-(--color-foreground)" />
-            <span className="h-0.5 w-full bg-(--color-foreground)" />
-          </span>
-        )}
+        <span className="flex w-6 flex-col gap-1.25" aria-hidden="true">
+          <span className="h-0.5 w-full bg-(--color-foreground)" />
+          <span className="h-0.5 w-full bg-(--color-foreground)" />
+          <span className="h-0.5 w-full bg-(--color-foreground)" />
+        </span>
       </button>
 
-      {isOpen && (
-        <div
-          id="mobile-navigation"
-          className="fixed inset-x-0 top-24 bottom-0 z-50 bg-white text-(--color-foreground) lg:hidden"
-        >
-          <nav
-            className="container h-full overflow-y-auto py-8"
-            aria-label="Navegación mobile"
+      <dialog
+        ref={dialogRef}
+        id="mobile-navigation"
+        className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none bg-white p-0 text-(--color-foreground) backdrop:bg-black/35 lg:hidden"
+        onClose={() => setIsOpen(false)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) closeMenu();
+        }}
+      >
+        <div className="container flex h-20 items-center justify-between border-b border-(--color-border)">
+          <span className="font-display text-xl font-semibold uppercase">Menú</span>
+          <button
+            type="button"
+            className="relative flex size-11 items-center justify-center rounded-sm"
+            aria-label="Cerrar menú"
+            onClick={closeMenu}
           >
+            <span className="relative size-6" aria-hidden="true">
+              <span className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 rotate-45 bg-(--color-foreground)" />
+              <span className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 -rotate-45 bg-(--color-foreground)" />
+            </span>
+          </button>
+        </div>
+        <nav
+          className="container h-[calc(100dvh-5rem)] overflow-y-auto py-8"
+          aria-label="Navegación móvil"
+        >
             <details className="group border-b border-(--color-border) pb-6">
               <summary className="flex cursor-pointer list-none items-center justify-between py-2 font-display text-3xl font-semibold uppercase">
                 Productos
@@ -124,9 +123,8 @@ export default function MobileMenu() {
                 </Link>
               ))}
             </div>
-          </nav>
-        </div>
-      )}
+        </nav>
+      </dialog>
     </>
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { navigation, productGroups } from "@/data/navigation";
+import { siteConfig } from "@/data/site";
 
 export default function Footer() {
   return (
@@ -25,9 +26,13 @@ export default function Footer() {
               obra e industria.
             </p>
 
-            <p className="mt-5 text-sm text-(--color-steel-500)">
-              Mercedes, Buenos Aires, Argentina
-            </p>
+            <address className="mt-5 space-y-2 text-sm not-italic text-(--color-steel-300)">
+              <a className="block transition-colors hover:text-white" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">
+                {siteConfig.address}
+              </a>
+              <a className="block transition-colors hover:text-white" href={siteConfig.phone.href}>{siteConfig.phone.display}</a>
+              <a className="block transition-colors hover:text-white" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+            </address>
           </div>
 
           <div>

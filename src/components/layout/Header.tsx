@@ -8,8 +8,8 @@ import ProductMenu from "./ProductMenu";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-(--color-border) bg-white">
-      <div className="container flex h-24 items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-(--color-border) bg-white/95 backdrop-blur-md supports-[backdrop-filter]:bg-white/90">
+      <div className="container flex h-20 items-center justify-between">
         <Link href="/" aria-label="Ir al inicio">
           <Image
             src="/images/brand/intraud-logo.png"
@@ -18,7 +18,7 @@ export default function Header() {
             height={230}
             sizes="150px"
             priority
-            className="h-15 w-37.5 shrink-0"
+            className="h-auto w-32 shrink-0 sm:w-37.5"
           />
         </Link>
 
@@ -32,7 +32,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-[15px] font-semibold transition-colors hover:text-(--color-brand-red)"
+              className="inline-flex min-h-11 items-center text-[15px] font-semibold transition-colors hover:text-(--color-brand-red)"
             >
               {item.label}
             </Link>

@@ -25,7 +25,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="container relative z-10 flex min-h-[calc(100dvh-97px)] items-center py-10 md:py-12 lg:py-16">
+      <div className="container relative z-10 flex min-h-[calc(100svh-81px)] items-center py-10 md:py-12 lg:py-16">
         <div className="max-w-3xl">
           <p className="mb-5 text-sm font-semibold tracking-[0.18em] text-(--color-brand-red) uppercase md:mb-6">
             Industria argentina

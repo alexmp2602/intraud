@@ -8,7 +8,7 @@ import TechnicalService from "@/components/home/TechnicalService";
 
 export default function Home() {
   return (
-    <main>
+    <main id="contenido-principal">
       <Hero />
       <ProductFamilies />
       <CompanyIntro />
