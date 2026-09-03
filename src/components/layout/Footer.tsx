@@ -27,11 +27,26 @@ export default function Footer() {
             </p>
 
             <address className="mt-5 space-y-2 text-sm not-italic text-(--color-steel-300)">
-              <a className="block transition-colors hover:text-white" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">
+              <a
+                className="block transition-colors hover:text-white"
+                href={siteConfig.mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {siteConfig.address}
               </a>
-              <a className="block transition-colors hover:text-white" href={siteConfig.phone.href}>{siteConfig.phone.display}</a>
-              <a className="block transition-colors hover:text-white" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+              <a
+                className="block transition-colors hover:text-white"
+                href={siteConfig.phone.href}
+              >
+                {siteConfig.phone.display}
+              </a>
+              <a
+                className="block transition-colors hover:text-white"
+                href={`mailto:${siteConfig.email}`}
+              >
+                {siteConfig.email}
+              </a>
             </address>
           </div>
 
