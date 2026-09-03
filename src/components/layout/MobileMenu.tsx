@@ -47,7 +47,9 @@ export default function MobileMenu() {
         }}
       >
         <div className="container flex h-20 items-center justify-between border-b border-(--color-border)">
-          <span className="font-display text-xl font-semibold uppercase">Menú</span>
+          <span className="font-display text-xl font-semibold uppercase">
+            Menú
+          </span>
           <button
             type="button"
             className="relative flex size-11 items-center justify-center rounded-sm"
@@ -64,65 +66,65 @@ export default function MobileMenu() {
           className="container h-[calc(100dvh-5rem)] overflow-y-auto py-8"
           aria-label="Navegación móvil"
         >
-            <details className="group border-b border-(--color-border) pb-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between py-2 font-display text-3xl font-semibold uppercase">
-                Productos
-                <svg
-                  viewBox="0 0 20 20"
-                  aria-hidden="true"
-                  className="size-5 transition-transform group-open:rotate-180"
-                >
-                  <path
-                    d="m5 7.5 5 5 5-5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </summary>
+          <details className="group border-b border-(--color-border) pb-6">
+            <summary className="flex cursor-pointer list-none items-center justify-between py-2 font-display text-3xl font-semibold uppercase">
+              Productos
+              <svg
+                viewBox="0 0 20 20"
+                aria-hidden="true"
+                className="size-5 transition-transform group-open:rotate-180"
+              >
+                <path
+                  d="m5 7.5 5 5 5-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                />
+              </svg>
+            </summary>
 
-              <div className="mt-5 grid gap-4 pb-2">
-                {productGroups.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex items-center gap-3 text-lg text-(--color-muted-foreground) transition-colors hover:text-(--color-foreground)"
-                    onClick={closeMenu}
-                  >
-                    <span
-                      className="h-0.5 w-5 shrink-0"
-                      style={{ backgroundColor: item.color }}
-                      aria-hidden="true"
-                    />
-
-                    {item.name}
-                  </Link>
-                ))}
-
-                <Link
-                  href="/productos"
-                  className="mt-2 font-semibold text-(--color-brand-red)"
-                  onClick={closeMenu}
-                >
-                  Ver todos los productos →
-                </Link>
-              </div>
-            </details>
-
-            <div className="grid">
-              {navigation.map((item) => (
+            <div className="mt-5 grid gap-4 pb-2">
+              {productGroups.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="border-b border-(--color-border) py-6 font-display text-3xl font-semibold uppercase transition-colors hover:text-(--color-brand-red)"
+                  className="flex items-center gap-3 text-lg text-(--color-muted-foreground) transition-colors hover:text-(--color-foreground)"
                   onClick={closeMenu}
                 >
-                  {item.label}
+                  <span
+                    className="h-0.5 w-5 shrink-0"
+                    style={{ backgroundColor: item.color }}
+                    aria-hidden="true"
+                  />
+
+                  {item.name}
                 </Link>
               ))}
+
+              <Link
+                href="/productos"
+                className="mt-2 font-semibold text-(--color-brand-red)"
+                onClick={closeMenu}
+              >
+                Ver todos los productos →
+              </Link>
             </div>
+          </details>
+
+          <div className="grid">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="border-b border-(--color-border) py-6 font-display text-3xl font-semibold uppercase transition-colors hover:text-(--color-brand-red)"
+                onClick={closeMenu}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </nav>
       </dialog>
     </>

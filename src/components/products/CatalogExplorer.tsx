@@ -41,19 +41,42 @@ export default function CatalogExplorer({
           <h2 className="font-display text-4xl font-semibold tracking-tight text-balance uppercase sm:text-5xl">
             {categoryName ?? "Todos los equipos"}
           </h2>
-          <p className="mt-2 text-sm text-(--color-muted-foreground)" aria-live="polite">
-            {visibleProducts.length} {visibleProducts.length === 1 ? "modelo" : "modelos"}
+          <p
+            className="mt-2 text-sm text-(--color-muted-foreground)"
+            aria-live="polite"
+          >
+            {visibleProducts.length}{" "}
+            {visibleProducts.length === 1 ? "modelo" : "modelos"}
           </p>
         </div>
 
         <div>
-          <label htmlFor="catalog-search" className="mb-2 block text-sm font-semibold">
+          <label
+            htmlFor="catalog-search"
+            className="mb-2 block text-sm font-semibold"
+          >
             Buscar por equipo o modelo
           </label>
           <div className="relative">
-            <svg className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-(--color-steel-500)" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
-              <path d="m16.5 16.5 4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            <svg
+              className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-(--color-steel-500)"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="11"
+                cy="11"
+                r="7"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              />
+              <path
+                d="m16.5 16.5 4 4"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
             </svg>
             <input
               id="catalog-search"
@@ -75,11 +98,17 @@ export default function CatalogExplorer({
         </div>
       ) : (
         <div className="border border-dashed border-(--color-steel-300) bg-(--color-surface) px-6 py-16 text-center">
-          <h3 className="font-display text-3xl font-semibold uppercase">No encontramos ese equipo</h3>
+          <h3 className="font-display text-3xl font-semibold uppercase">
+            No encontramos ese equipo
+          </h3>
           <p className="mt-3 text-(--color-muted-foreground)">
             Probá con el modelo, el proceso de soldadura o una categoría.
           </p>
-          <button type="button" onClick={() => setQuery("")} className="mt-6 min-h-12 rounded-sm bg-black px-5 font-semibold text-white">
+          <button
+            type="button"
+            onClick={() => setQuery("")}
+            className="mt-6 min-h-12 rounded-sm bg-black px-5 font-semibold text-white"
+          >
             Limpiar búsqueda
           </button>
         </div>

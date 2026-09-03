@@ -15,7 +15,8 @@ export default function Catalogo() {
               className="font-display max-w-4xl font-semibold leading-none tracking-tight uppercase"
               style={{ fontSize: "var(--text-h1)" }}
             >
-              Mirá el catálogo completo y encontrá el equipo adecuado para tu trabajo.
+              Mirá el catálogo completo y encontrá el equipo adecuado para tu
+              trabajo.
             </h2>
           </div>
 

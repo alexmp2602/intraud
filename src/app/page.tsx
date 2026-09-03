@@ -5,7 +5,6 @@ import ProductFamilies from "@/components/home/ProductFamilies";
 import Catalogo from "@/components/home/Catalogo";
 import TechnicalService from "@/components/home/TechnicalService";
 
-
 export default function Home() {
   return (
     <main id="contenido-principal">

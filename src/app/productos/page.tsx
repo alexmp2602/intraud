@@ -15,12 +15,24 @@ export const metadata: Metadata = {
   alternates: { canonical: "/productos" },
 };
 
-export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-  const [{ categoria }, products] = await Promise.all([searchParams, getCatalogProducts()]);
-  const selectedCategory = productGroups.some((group) => group.href === `/productos?categoria=${categoria}`) ? categoria : undefined;
-  const visibleProducts = selectedCategory ? products.filter((product) => product.categoryId === selectedCategory) : products;
+export default async function ProductsPage({
+  searchParams,
+}: ProductsPageProps) {
+  const [{ categoria }, products] = await Promise.all([
+    searchParams,
+    getCatalogProducts(),
+  ]);
+  const selectedCategory = productGroups.some(
+    (group) => group.href === `/productos?categoria=${categoria}`,
+  )
+    ? categoria
+    : undefined;
+  const visibleProducts = selectedCategory
+    ? products.filter((product) => product.categoryId === selectedCategory)
+    : products;
   const selectedCategoryName = selectedCategory
-    ? productGroups.find((group) => group.href.endsWith(`=${selectedCategory}`))?.name
+    ? productGroups.find((group) => group.href.endsWith(`=${selectedCategory}`))
+        ?.name
     : undefined;
 
   return (
@@ -47,7 +59,16 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
             {productGroups.map((group) => {
               const active = group.href.endsWith(`=${selectedCategory}`);
-              return <Link key={group.name} href={group.href} aria-current={active ? "page" : undefined} className={`rounded-sm px-4 py-2.5 text-sm font-semibold transition-colors ${active ? "bg-black text-white" : "hover:bg-(--color-steel-100)"}`}>{group.name}</Link>;
+              return (
+                <Link
+                  key={group.name}
+                  href={group.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-sm px-4 py-2.5 text-sm font-semibold transition-colors ${active ? "bg-black text-white" : "hover:bg-(--color-steel-100)"}`}
+                >
+                  {group.name}
+                </Link>
+              );
             })}
           </nav>
         </div>
@@ -55,7 +76,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
       <section className="py-16 lg:py-20">
         <div className="container">
-          <CatalogExplorer products={visibleProducts} categoryName={selectedCategoryName} />
+          <CatalogExplorer
+            products={visibleProducts}
+            categoryName={selectedCategoryName}
+          />
         </div>
       </section>
     </main>
