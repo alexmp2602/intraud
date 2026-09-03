@@ -24,7 +24,7 @@ const barlowCondensed = Barlow_Condensed({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Intraud | Equipos de soldadura y corte",
+    default: "Intraud",
     template: "%s | Intraud",
   },
   description:
