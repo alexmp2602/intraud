@@ -18,7 +18,12 @@ export type CatalogProductSummary = {
 
 export type CatalogProduct = CatalogProductSummary & {
   datasheetUrl: string | null;
-  specifications: Array<{ key: string; label: string; value: string; position: number }>;
+  specifications: Array<{
+    key: string;
+    label: string;
+    value: string;
+    position: number;
+  }>;
 };
 
 type ProductRow = {
@@ -31,13 +36,23 @@ type ProductRow = {
   datasheet_url?: string | null;
   product_categories: { name: string; color: string | null } | null;
   product_subcategories: { name: string } | null;
-  product_specifications?: Array<{ key: string; label: string; value: string; position: number }>;
-  product_images: Array<{ storage_path: string; is_primary: boolean; position: number }>;
+  product_specifications?: Array<{
+    key: string;
+    label: string;
+    value: string;
+    position: number;
+  }>;
+  product_images: Array<{
+    storage_path: string;
+    is_primary: boolean;
+    position: number;
+  }>;
 };
 
 function normalizeSummary(row: ProductRow): CatalogProductSummary {
   const images = [...row.product_images].sort(
-    (a, b) => Number(b.is_primary) - Number(a.is_primary) || a.position - b.position,
+    (a, b) =>
+      Number(b.is_primary) - Number(a.is_primary) || a.position - b.position,
   );
 
   return {
@@ -49,7 +64,8 @@ function normalizeSummary(row: ProductRow): CatalogProductSummary {
     categoryName: row.product_categories?.name ?? row.category_id,
     categoryColor: row.product_categories?.color ?? null,
     subcategoryName: row.product_subcategories?.name ?? null,
-    shortDescription: row.short_description ?? "Equipo Intraud para uso profesional.",
+    shortDescription:
+      row.short_description ?? "Equipo Intraud para uso profesional.",
     image: images[0]?.storage_path ?? null,
   };
 }
@@ -71,29 +87,41 @@ const productSummarySelect = `
   product_images (storage_path, is_primary, position)
 `;
 
-const getCatalogProductsCached = unstable_cache(async () => {
-  const { data, error } = await createPublicSupabaseClient()
-    .from("products")
-    .select(productSummarySelect)
-    .eq("is_active", true)
-    .order("category_id")
-    .order("position");
+const getCatalogProductsCached = unstable_cache(
+  async () => {
+    const { data, error } = await createPublicSupabaseClient()
+      .from("products")
+      .select(productSummarySelect)
+      .eq("is_active", true)
+      .order("category_id")
+      .order("position");
 
-  if (error) throw new Error(`No se pudo cargar el catálogo: ${error.message}`);
-  return (data as unknown as ProductRow[]).map(normalizeSummary);
-}, ["catalog-products"], { revalidate: 3600, tags: ["catalog"] });
+    if (error)
+      throw new Error(`No se pudo cargar el catálogo: ${error.message}`);
+    return (data as unknown as ProductRow[]).map(normalizeSummary);
+  },
+  ["catalog-products"],
+  { revalidate: 3600, tags: ["catalog"] },
+);
 
-const getCatalogProductCached = unstable_cache(async (slug: string) => {
-  const { data, error } = await createPublicSupabaseClient()
-    .from("products")
-    .select(`${productSummarySelect}, datasheet_url, product_specifications (key, label, value, position)`)
-    .eq("slug", slug)
-    .eq("is_active", true)
-    .maybeSingle();
+const getCatalogProductCached = unstable_cache(
+  async (slug: string) => {
+    const { data, error } = await createPublicSupabaseClient()
+      .from("products")
+      .select(
+        `${productSummarySelect}, datasheet_url, product_specifications (key, label, value, position)`,
+      )
+      .eq("slug", slug)
+      .eq("is_active", true)
+      .maybeSingle();
 
-  if (error) throw new Error(`No se pudo cargar el producto: ${error.message}`);
-  return data ? normalizeProduct(data as unknown as ProductRow) : null;
-}, ["catalog-product"], { revalidate: 3600, tags: ["catalog"] });
+    if (error)
+      throw new Error(`No se pudo cargar el producto: ${error.message}`);
+    return data ? normalizeProduct(data as unknown as ProductRow) : null;
+  },
+  ["catalog-product"],
+  { revalidate: 3600, tags: ["catalog"] },
+);
 
 export const getCatalogProducts = cache(getCatalogProductsCached);
 export const getCatalogProduct = cache(getCatalogProductCached);
