@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Intraud",
   },
   description:
-    "Fabricación argentina de equipos de soldadura, corte por plasma, cargadores y arrancadores para taller, obra e industria.",
+    "Fabricación argentina de equipos de soldadura, corte por plasma, cargadores y arrancadores de baterias para taller, obra e industria.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
