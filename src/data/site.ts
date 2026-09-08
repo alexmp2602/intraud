@@ -13,7 +13,7 @@ export const siteConfig = {
   },
   email: "soldadoras@intraud.com",
   address: "Calle 24 N.º 3141, Mercedes, Buenos Aires",
-  mapsUrl: "https://maps.google.com/?q=Calle+24+3141+Mercedes+Buenos+Aires",
+  mapsUrl: "https://maps.app.goo.gl/5SyLoRD6FA2ot61V7",
   catalogUrl: "https://pdf.intraud.com/INTRAUD-catalogo-2026.pdf",
 } as const;
 
