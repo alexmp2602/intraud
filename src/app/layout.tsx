@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 import "./globals.css";
 
@@ -81,7 +82,10 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         <Header />
-        {children}
+        <body>
+          {children}
+          <WhatsAppButton phoneNumber="5491120292119" />
+        </body>
         <Footer />
       </body>
     </html>
