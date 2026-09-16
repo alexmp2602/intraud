@@ -132,9 +132,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     href={product.datasheetUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex min-h-12 items-center justify-center rounded-sm border border-(--color-foreground) px-6 font-semibold transition-colors hover:bg-black hover:text-white"
+                    type="application/pdf"
+                    aria-label={`Abrir y descargar la ficha técnica de ${product.name} en PDF`}
+                    className="inline-flex min-h-12 items-center justify-center gap-3 rounded-sm border border-(--color-foreground) px-6 font-semibold transition-colors hover:bg-black hover:text-white"
                   >
-                    Ver ficha técnica
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      className="size-5 fill-none stroke-current"
+                      strokeWidth="1.8"
+                    >
+                      <path d="M7 2.75h6.5L18.25 7.5V21.25H7z" />
+                      <path d="M13.5 2.75V7.5h4.75M9.5 12.25h6M9.5 15.25h6" />
+                    </svg>
+                    Abrir / descargar PDF
+                    <span aria-hidden="true">↗</span>
                   </a>
                 )}
               </div>
