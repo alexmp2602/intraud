@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
-import WhatsAppButton from "@/components/WhatsAppButton";
-
 import "./globals.css";
 
+import WhatsAppButton from "@/components/WhatsAppButton";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { siteConfig } from "@/data/site";
@@ -82,11 +81,9 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         <Header />
-        <body>
-          {children}
-          <WhatsAppButton phoneNumber="5491120292119" />
-        </body>
+        {children}
         <Footer />
+        <WhatsAppButton phoneNumber="5491120292119" />
       </body>
     </html>
   );
