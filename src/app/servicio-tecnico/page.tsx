@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const steps = [
   [
     "Contanos qué sucede",
-    "Nuestro equipo técnico evalúa el problema y, cuando es posible, te guía para resolverlo sin trasladar la máquina.",
+    "Nuestro equipo técnico evalúa el problema y te guía para resolverlo sin trasladar la máquina.",
   ],
   [
     "Coordinamos la recepción",

@@ -41,8 +41,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-(--color-steel-300) sm:text-lg md:mt-8 md:text-xl">
-            Equipos de soldadura y corte desarrollados para responder en taller,
-            obra e industria.
+            Equipos de soldadura, corte plasma y cargadores de baterías.
           </p>
 
           <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5 md:mt-10">
